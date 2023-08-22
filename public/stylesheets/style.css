@@ -1,8 +1,19 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
 }
 
 a {
-  color: #00B7FF;
+    text-decoration-line: none;
+    color: darkcyan;
+}
+
+body {
+    padding: 50px;
+    font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
