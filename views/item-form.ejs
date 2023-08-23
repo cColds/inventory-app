@@ -33,10 +33,16 @@
                 />
 
                 <label for="item-field-category">Category</label>
-                <select name="item-category" id="item-field-category">
-                    <!-- TODO: Loop through an array of categories -->
-                </select>
 
+                <select name="item-category" id="item-field-category">
+                        <% categories.forEach((category) => {%>
+                            <option value=<%=category.name %> ><%= category.name%></option>
+                            <% }) %>
+                    
+                        </select>
+                        <% if (categories.length === 0) { %>
+                            <p class="error-text">You need to create a category first</p>   
+                        <% } %>
                 <button type="submit" class="submit-btn">Submit</button>
             </form>
         </div>
