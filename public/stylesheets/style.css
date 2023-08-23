@@ -17,3 +17,15 @@ body {
     padding: 50px;
     font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+button {
+    cursor: pointer;
+}
+
+button,
+input,
+select {
+    border: 0;
+    border-radius: 5px;
+    padding: 5px;
+}
