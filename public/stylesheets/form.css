@@ -1,0 +1,29 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-wrapper .title {
+    margin-bottom: 10px;
+}
+
+.item-form {
+    display: flex;
+    flex-direction: column;
+    width: clamp(200px, 75%, 500px);
+    background-color: #cbd5e1;
+    padding: 15px;
+    border-radius: 5px;
+    gap: 8px;
+}
+
+.submit-btn {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
