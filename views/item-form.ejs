@@ -7,42 +7,78 @@
             <h1 class="title"><%=title%></h1>
             <form action="" method="post" class="item-form">
                 <label for="item-field-name">Name</label>
-                <input type="text" id="item-field-name" name="item-name" />
+                <input
+                    type="text"
+                    id="item-field-name"
+                    name="item-name"
+                    placeholder="Name"
+                    value="<%=name ? name : ''%>"
+                    required
+                />
+                <% if (nameError) { %>
+                <p class="error-text"><%= nameError.msg %></p>
+                <% } %>
 
-                <label for="item-field-description">Description</label>
+                <label for="item-field-description"
+                    >Description
+                    <span class="optional-text">(optional)</span></label
+                >
                 <input
                     type="text"
                     id="item-field-description"
                     name="item-description"
+                    value="<%=description ? description : ''%>"
+                    placeholder="Description"
                 />
+                <% if (descriptionError) { %>
+                <p class="error-text"><%= descriptionError.msg %></p>
+                <% } %>
 
-                <label for="item-field-price"> Price </label>
+                <label for="item-field-price"> Price ($)</label>
                 <input
                     type="number"
                     id="item-field-price"
                     name="item-price"
-                    value="0"
+                    step="0.01"
+                    value="<%=price ? price : ''%>"
+                    placeholder="Price in USD"
+                    required
                 />
+                <% if (priceError) { %>
+                <p class="error-text"><%= priceError.msg %></p>
+                <% } %>
 
                 <label for="item-field-stock">Stock</label>
                 <input
                     type="number"
                     id="item-field-stock"
                     name="item-stock"
-                    value="0"
+                    value="<%=stock ? stock : ''%>"
+                    placeholder="Amount"
+                    required
                 />
+                <% if (stockError) { %>
+                <p class="error-text"><%= stockError.msg %></p>
+                <% } %>
 
                 <label for="item-field-category">Category</label>
 
                 <select name="item-category" id="item-field-category">
-                        <% categories.forEach((category) => {%>
-                            <option value=<%=category.name %> ><%= category.name%></option>
-                            <% }) %>
-                    
-                        </select>
-                        <% if (categories.length === 0) { %>
-                            <p class="error-text">You need to create a category first</p>   
-                        <% } %>
+                    <% categories.forEach((category) => {%> <% if (selected &&
+                    category.name === selected) { %>
+                    <option value="<%=category.name %>" selected>
+                        <% } else { %>
+                    </option>
+
+                    <option value="<%=category.name %>">
+                        <% } %> <%= category.name%>
+                    </option>
+                    <% }) %>
+                </select>
+                <% if (categoryError) { %>
+                <p class="error-text"><%= categoryError.msg %></p>
+                <% } %>
+
                 <button type="submit" class="submit-btn">Submit</button>
             </form>
         </div>
