@@ -126,7 +126,7 @@ const createItemPOST = [
             stock,
         });
 
-        item.save();
+        await item.save();
         res.redirect("/");
     },
 ];
