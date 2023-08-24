@@ -24,9 +24,11 @@ button {
 
 button,
 input,
-select {
+select,
+textarea {
     border: 0;
     border-radius: 5px;
+    padding: 10px;
 }
 
 select {
@@ -34,8 +36,13 @@ select {
     border-right: 10px solid transparent;
 }
 
-button,
+textarea {
+    resize: vertical;
+    min-height: 50px;
+    max-height: 250px;
+}
+
 input,
-select {
-    padding: 10px;
+textarea {
+    background-color: #e2e8f0;
 }

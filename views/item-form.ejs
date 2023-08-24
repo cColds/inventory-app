@@ -23,13 +23,14 @@
                     >Description
                     <span class="optional-text">(optional)</span></label
                 >
-                <input
-                    type="text"
+                <textarea
                     id="item-field-description"
                     name="item-description"
                     value="<%=description ? description : ''%>"
                     placeholder="Description"
-                />
+                    rows="5"
+                    maxlength="350"
+                ></textarea>
                 <% if (descriptionError) { %>
                 <p class="error-text"><%= descriptionError.msg %></p>
                 <% } %>
