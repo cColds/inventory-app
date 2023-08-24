@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <%- include("./partials/head.ejs") -%>
+
+    <body>
+        <%- include("nav") -%>
+
+        <div class="form-wrapper">
+            <h1 class="title"><%= title %></h1>
+            <form action="" method="post" class="category-form">
+                <label for="category-field-name">Name</label>
+                <input
+                    type="text"
+                    id="category-field-name"
+                    name="category-name"
+                    placeholder="Name"
+                    value="<%=name ? name : ''%>"
+                    maxlength="50"
+                    required
+                />
+                <% if (nameError) { %>
+                <p class="error-text"><%= nameError.msg %></p>
+                <% } %>
+
+                <label for="category-field-description"
+                    >Description
+                    <span class="optional-text">(optional)</span></label
+                >
+                <textarea
+                    id="category-field-description"
+                    name="category-description"
+                    value="<%=description ? description : ''%>"
+                    placeholder="Description"
+                    rows="5"
+                    maxlength="350"
+                ></textarea>
+                <% if (descriptionError) { %>
+                <p class="error-text"><%= descriptionError.msg %></p>
+                <% } %>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

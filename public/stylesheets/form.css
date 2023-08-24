@@ -9,7 +9,8 @@
     margin-bottom: 10px;
 }
 
-.item-form {
+.item-form,
+.category-form {
     display: flex;
     flex-direction: column;
     width: clamp(250px, 100%, 750px);

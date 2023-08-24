@@ -10,6 +10,7 @@ const mongoDB = process.env.MONGODB_URI;
 
 const indexRouter = require("./routes/index");
 const itemRouter = require("./routes/item");
+const categoryRouter = require("./routes/category");
 
 const app = express();
 mongoose.set("strictQuery", false);
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use(itemRouter);
+app.use(categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
