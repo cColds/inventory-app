@@ -5,10 +5,6 @@
     flex-direction: column;
 }
 
-.form-wrapper .title {
-    margin-bottom: 10px;
-}
-
 .item-form,
 .category-form {
     display: flex;

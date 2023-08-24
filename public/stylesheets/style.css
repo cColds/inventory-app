@@ -48,3 +48,7 @@ textarea {
     min-height: 50px;
     max-height: 250px;
 }
+
+.title {
+    margin-bottom: 25px;
+}
