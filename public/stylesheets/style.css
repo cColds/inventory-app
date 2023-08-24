@@ -27,9 +27,15 @@ input,
 select {
     border: 0;
     border-radius: 5px;
-    padding: 5px;
 }
 
 select {
     text-transform: capitalize;
+    border-right: 10px solid transparent;
+}
+
+button,
+input,
+select {
+    padding: 10px;
 }
