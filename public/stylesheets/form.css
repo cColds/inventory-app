@@ -12,11 +12,15 @@
 .item-form {
     display: flex;
     flex-direction: column;
-    width: clamp(200px, 75%, 500px);
-    background-color: #cbd5e1;
+    width: clamp(250px, 100%, 750px);
     padding: 15px;
     border-radius: 5px;
     gap: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.item-form input {
+    background-color: #e2e8f0;
 }
 
 .submit-btn {
@@ -30,4 +34,8 @@
 
 .error-text {
     color: #b91c1c;
+}
+
+.optional-text {
+    color: #64748b;
 }
