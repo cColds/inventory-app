@@ -5,7 +5,23 @@
     <body>
         <%- include("nav") -%>
 
-        <h1><%= title %></h1>
-        <p>Welcome to <%= title %></p>
+        <h1 class="title"><%= title %></h1>
+
+        <div class="stats">
+            <div>Items: <strong><%= items.length%></strong></div>
+            <div>Categories: <strong><%= categories.length%></strong></div>
+            <div>Inventory Value: <strong><%= totalValue%></strong></div>
+        </div>
+
+        <h2>Items</h2>
+        <div class="item-card-wrapper">
+            <% items.forEach(item => { %>
+            <div class="item-card">
+                <a href="<%= item.url %>"><%= item.name %></a>
+                <p><strong><%= item.priceFormatted %></strong></p>
+                <p class="category"><%= item.category %></p>
+            </div>
+            <% }) %>
+        </div>
     </body>
 </html>

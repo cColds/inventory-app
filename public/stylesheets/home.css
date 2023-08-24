@@ -1,0 +1,30 @@
+.item-card-wrapper {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.item-card {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
+    gap: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.category {
+    text-transform: capitalize;
+    border-radius: 100vh;
+    padding: 0 8px;
+    width: min-content;
+    font-size: 12px;
+    background-color: #cbd5e1;
+}
+
+.stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 15px;
+}
