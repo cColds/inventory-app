@@ -14,4 +14,11 @@ itemSchema.virtual("url").get(function () {
     return `/items/${this._id}`;
 });
 
+itemSchema.virtual("priceFormatted").get(function () {
+    return this.price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+    });
+});
+
 module.exports = model("item", itemSchema);
