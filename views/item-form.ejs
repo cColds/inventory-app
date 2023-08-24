@@ -13,6 +13,7 @@
                     name="item-name"
                     placeholder="Name"
                     value="<%=name ? name : ''%>"
+                    maxlength="150"
                     required
                 />
                 <% if (nameError) { %>
@@ -43,6 +44,7 @@
                     step="0.01"
                     value="<%=price ? price : ''%>"
                     placeholder="Price in USD"
+                    min="0.01"
                     required
                 />
                 <% if (priceError) { %>
@@ -56,6 +58,8 @@
                     name="item-stock"
                     value="<%=stock ? stock : ''%>"
                     placeholder="Amount"
+                    min="1"
+                    max="1000000"
                     required
                 />
                 <% if (stockError) { %>
