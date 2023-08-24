@@ -27,11 +27,12 @@
                 <textarea
                     id="item-field-description"
                     name="item-description"
-                    value="<%=description ? description : ''%>"
                     placeholder="Description"
                     rows="5"
                     maxlength="350"
-                ></textarea>
+                >
+<%=description ? description : ''%></textarea
+                >
                 <% if (descriptionError) { %>
                 <p class="error-text"><%= descriptionError.msg %></p>
                 <% } %>
