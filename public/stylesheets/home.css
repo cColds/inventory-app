@@ -21,10 +21,19 @@
     width: min-content;
     font-size: 12px;
     background-color: #cbd5e1;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .stats {
     display: flex;
     gap: 12px;
     margin-bottom: 15px;
+}
+
+.item-card-name,
+.item-card-price,
+.category {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

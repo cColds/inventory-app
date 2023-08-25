@@ -17,8 +17,12 @@
         <div class="item-card-wrapper">
             <% items.forEach(item => { %>
             <div class="item-card">
-                <a href="<%= item.url %>"><%= item.name %></a>
-                <p><strong><%= item.priceFormatted %></strong></p>
+                <a class="item-card-name" href="<%= item.url %>"
+                    ><%= item.name %></a
+                >
+                <p class="item-card-price">
+                    <strong><%= item.priceFormatted %></strong>
+                </p>
                 <p class="category"><%= item.category %></p>
             </div>
             <% }) %>
