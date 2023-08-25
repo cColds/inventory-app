@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <%- include("./partials/head.ejs") -%>
+    <body>
+        <%- include("nav"); -%>
+
+        <div class="delete-item-wrapper">
+            <h1 class="title"><%= title %></h1>
+            <p class="delete-item-warning">
+                Are you sure you want to delete
+                <strong><%= item.name %></strong>?
+            </p>
+
+            <div class="delete-item-btn-wrapper">
+                <a href="<%= item.url %>" class="delete-item-cancel">Cancel</a>
+                <button class="delete-item-confirm">Confirm</button>
+            </div>
+        </div>
+    </body>
+</html>

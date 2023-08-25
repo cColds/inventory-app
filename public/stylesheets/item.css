@@ -13,11 +13,54 @@
     color: #64748b;
 }
 
-.update-item-btn {
-    background-color: #b91c1c;
+.item-link-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.update-item-link {
     color: white;
+    background-color: #15803d;
+}
+
+.delete-item-link,
+.delete-item-confirm {
+    color: white;
+    background-color: #b91c1c;
+}
+
+.update-item-link,
+.delete-item-link,
+.delete-item-cancel,
+.delete-item-confirm {
     border-radius: 5px;
-    padding: 6px 8px;
+    padding: 6px 12px;
     width: min-content;
     white-space: nowrap;
+}
+
+.delete-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delete-item-warning {
+    margin-bottom: 15px;
+}
+
+.delete-item-btn-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.delete-item-cancel {
+    background-color: #e2e8f0;
+    color: black;
+}
+
+.delete-item-confirm {
+    font-size: 16px;
 }

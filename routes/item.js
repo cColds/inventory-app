@@ -11,4 +11,6 @@ router.get("/item/:itemId/update-item", itemController.updateItemGET);
 
 router.post("/item/:itemId/update-item", itemController.updateItemPOST);
 
+router.get("/item/:itemId/delete-item", itemController.deleteItemGET);
+
 module.exports = router;

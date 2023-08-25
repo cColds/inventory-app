@@ -111,9 +111,16 @@ const updateItemPOST = [
     },
 ];
 
+async function deleteItemGET(req, res) {
+    const item = await ItemModel.findById(req.params.itemId);
+
+    res.render("delete-item", { title: "Delete Item", item });
+}
+
 module.exports = {
     createItemGET,
     createItemPOST,
     updateItemGET,
     updateItemPOST,
+    deleteItemGET,
 };
