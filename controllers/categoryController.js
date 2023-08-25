@@ -60,4 +60,10 @@ const createCategoryPOST = [
     },
 ];
 
-module.exports = { createCategoryGET, createCategoryPOST };
+async function categoryListGET(req, res) {
+    const categories = await CategoryModel.find();
+
+    res.render("category-list", { title: "Categories", categories });
+}
+
+module.exports = { createCategoryGET, createCategoryPOST, categoryListGET };
