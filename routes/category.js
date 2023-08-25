@@ -16,4 +16,9 @@ router.get(
     categoryController.updateCategoryGET
 );
 
+router.post(
+    "/categories/:categoryId/update-category",
+    categoryController.updateCategoryPOST
+);
+
 module.exports = router;
