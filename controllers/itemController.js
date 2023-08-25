@@ -132,7 +132,7 @@ const createItemPOST = [
         });
 
         await item.save();
-        res.redirect("/");
+        res.redirect(item.url);
     },
 ];
 
