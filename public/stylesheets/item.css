@@ -1,0 +1,14 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
+    gap: 12px;
+    width: clamp(250px, 100%, 500px);
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.item-description {
+    color: #64748b;
+}

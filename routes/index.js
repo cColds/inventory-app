@@ -4,10 +4,8 @@ const indexController = require("../controllers/indexController");
 const router = express.Router();
 
 /* GET home page. */
-router.get("/", indexController.home);
+router.get("/", indexController.homePage);
 
-router.get("/item/:itemId", (req, res) => {
-    res.send("Item page not implemented (GET)");
-});
+router.get("/item/:itemId", indexController.itemPage);
 
 module.exports = router;

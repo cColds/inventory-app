@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+    <%- include("./partials/head.ejs") -%>
+    <body>
+        <%- include("nav"); -%>
+
+        <div class="item">
+            <h1><%= item.name %></h1>
+            <p><strong><%= item.priceFormatted %></strong></p>
+            <p class="item-description"><%= item.description %></p>
+            <p class="item-stock">In stock: <%= item.stock %></p>
+            <p class="category"><%= item.category %></p>
+        </div>
+    </body>
+</html>

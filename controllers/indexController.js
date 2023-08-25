@@ -1,7 +1,7 @@
 const ItemModel = require("../models/item");
 const CategoryModel = require("../models/category");
 
-async function home(req, res, next) {
+async function homePage(req, res, next) {
     const items = await ItemModel.find();
     const categories = await CategoryModel.find();
     const [{ totalValue }] = await ItemModel.aggregate([
@@ -21,4 +21,10 @@ async function home(req, res, next) {
     });
 }
 
-module.exports = { home };
+async function itemPage(req, res, next) {
+    const item = await ItemModel.findById(req.params.itemId);
+
+    res.render("item", { title: "Item", item });
+}
+
+module.exports = { homePage, itemPage };
