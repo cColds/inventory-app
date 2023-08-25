@@ -117,10 +117,19 @@ async function deleteItemGET(req, res) {
     res.render("delete-item", { title: "Delete Item", item });
 }
 
+async function deleteItemPOST(req, res) {
+    const item = await ItemModel.findById(req.params.itemId);
+
+    await item.deleteOne({ _id: req.params.itemId });
+
+    res.redirect("/");
+}
+
 module.exports = {
     createItemGET,
     createItemPOST,
     updateItemGET,
     updateItemPOST,
     deleteItemGET,
+    deleteItemPOST,
 };
