@@ -19,19 +19,19 @@
     gap: 8px;
 }
 
-.update-item-link {
+.update-item {
     color: white;
     background-color: #15803d;
 }
 
-.delete-item-link,
+.delete-item,
 .delete-item-confirm {
     color: white;
     background-color: #b91c1c;
 }
 
-.update-item-link,
-.delete-item-link,
+.update-item,
+.delete-item,
 .delete-item-cancel,
 .delete-item-confirm {
     border-radius: 5px;
