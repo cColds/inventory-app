@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <%- include("./partials/head.ejs") -%>
+    <body>
+        <%- include("nav"); -%>
+
+        <div class="delete-category-wrapper">
+            <h1 class="title"><%= title %></h1>
+            <% if (itemsWithCategory.length) { %>
+            <p class="delete-category-warning">Delete the following items</p>
+            <% itemsWithCategory.forEach(item => { %>
+            <a class="item-name" href="<%= item.url %>"><%= item.name %></a>
+
+            <% }) %> <% } else { %>
+            <p class="delete-category-warning">
+                Are you sure you want to delete
+                <strong><%= category.name %></strong>?
+            </p>
+
+            <form class="delete-category-btn-wrapper" action="" method="post">
+                <a href="<%= category.url %>" class="delete-category-cancel"
+                    >Cancel</a
+                >
+                <button class="delete-category-confirm">Confirm</button>
+            </form>
+            <% } %>
+        </div>
+    </body>
+</html>

@@ -42,15 +42,43 @@
     background-color: #15803d;
 }
 
-.delete-category {
+.delete-category,
+.delete-category-confirm {
     color: white;
     background-color: #b91c1c;
 }
 
 .update-category,
-.delete-category {
+.delete-category,
+.delete-category-cancel,
+.delete-category-confirm {
     border-radius: 5px;
     padding: 6px 12px;
     width: min-content;
     white-space: nowrap;
+}
+
+.delete-category-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delete-category-warning {
+    margin-bottom: 15px;
+}
+
+.delete-category-btn-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.delete-category-cancel {
+    background-color: #e2e8f0;
+    color: black;
+}
+
+.delete-category-confirm {
+    font-size: 16px;
 }

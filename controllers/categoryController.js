@@ -1,5 +1,6 @@
 const { body } = require("express-validator");
 const CategoryModel = require("../models/category");
+const ItemModel = require("../models/item");
 const handleCategoryValidation = require("../validation/handleCategoryValidation");
 const {
     nameValidator,
@@ -85,6 +86,17 @@ const updateCategoryPOST = [
     },
 ];
 
+async function deleteCategoryGET(req, res) {
+    const category = await CategoryModel.findById(req.params.categoryId);
+    const itemsWithCategory = await ItemModel.find({ category: category.name });
+
+    res.render("delete-category", {
+        title: "Delete Category",
+        category,
+        itemsWithCategory,
+    });
+}
+
 module.exports = {
     createCategoryGET,
     createCategoryPOST,
@@ -92,4 +104,5 @@ module.exports = {
     categoryGET,
     updateCategoryGET,
     updateCategoryPOST,
+    deleteCategoryGET,
 };
