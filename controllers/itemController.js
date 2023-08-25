@@ -3,6 +3,40 @@ const CategoryModel = require("../models/category");
 const ItemModel = require("../models/item");
 const isNumeric = require("../utils/isNumeric");
 
+async function handleValidation(req, res, next) {
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+        const categories = await CategoryModel.find({}, "name");
+        const { errors } = result;
+        const nameError = errors.find((err) => err.path === "item-name");
+        const descriptionError = errors.find(
+            (err) => err.path === "item-description"
+        );
+        const priceError = errors.find((err) => err.path === "item-price");
+        const stockError = errors.find((err) => err.path === "item-stock");
+        const categoryError = errors.find(
+            (err) => err.path === "item-category"
+        );
+
+        res.render("item-form", {
+            title: "Create Item",
+            name: req.body["item-name"],
+            description: req.body["item-description"],
+            price: req.body["item-price"],
+            stock: req.body["item-stock"],
+            categories,
+            selected: req.body["item-category"],
+            nameError,
+            descriptionError,
+            priceError,
+            stockError,
+            categoryError,
+        });
+    }
+
+    next();
+}
+
 async function createItemGET(req, res) {
     const categories = await CategoryModel.find({}, "name");
 
@@ -82,39 +116,9 @@ const createItemPOST = [
             return true;
         })
         .escape(),
-
+    handleValidation,
     async (req, res) => {
-        const result = validationResult(req);
-        if (!result.isEmpty()) {
-            const categories = await CategoryModel.find({}, "name");
-            const { errors } = result;
-            const nameError = errors.find((err) => err.path === "item-name");
-            const descriptionError = errors.find(
-                (err) => err.path === "item-description"
-            );
-            const priceError = errors.find((err) => err.path === "item-price");
-            const stockError = errors.find((err) => err.path === "item-stock");
-            const categoryError = errors.find(
-                (err) => err.path === "item-category"
-            );
-
-            res.render("item-form", {
-                title: "Create Item",
-                name: req.body["item-name"],
-                description: req.body["item-description"],
-                price: req.body["item-price"],
-                stock: req.body["item-stock"],
-                categories,
-                selected: req.body["item-category"],
-                nameError,
-                descriptionError,
-                priceError,
-                stockError,
-                categoryError,
-            });
-            return;
-        }
-
+        console.log("Post sending");
         const {
             "item-name": name,
             "item-description": description,
@@ -216,39 +220,8 @@ const updateItemPOST = [
             return true;
         })
         .escape(),
-
+    handleValidation,
     async (req, res) => {
-        const result = validationResult(req);
-        if (!result.isEmpty()) {
-            const categories = await CategoryModel.find({}, "name");
-            const { errors } = result;
-            const nameError = errors.find((err) => err.path === "item-name");
-            const descriptionError = errors.find(
-                (err) => err.path === "item-description"
-            );
-            const priceError = errors.find((err) => err.path === "item-price");
-            const stockError = errors.find((err) => err.path === "item-stock");
-            const categoryError = errors.find(
-                (err) => err.path === "item-category"
-            );
-
-            res.render("item-form", {
-                title: "Create Item",
-                name: req.body["item-name"],
-                description: req.body["item-description"],
-                price: req.body["item-price"],
-                stock: req.body["item-stock"],
-                categories,
-                selected: req.body["item-category"],
-                nameError,
-                descriptionError,
-                priceError,
-                stockError,
-                categoryError,
-            });
-            return;
-        }
-
         const {
             "item-name": name,
             "item-description": description,
