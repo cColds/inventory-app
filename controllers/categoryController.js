@@ -66,4 +66,15 @@ async function categoryListGET(req, res) {
     res.render("category-list", { title: "Categories", categories });
 }
 
-module.exports = { createCategoryGET, createCategoryPOST, categoryListGET };
+async function categoryGET(req, res) {
+    const category = await CategoryModel.findById(req.params.categoryId);
+
+    res.render("category", { title: "Category", category });
+}
+
+module.exports = {
+    createCategoryGET,
+    createCategoryPOST,
+    categoryListGET,
+    categoryGET,
+};

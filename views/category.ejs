@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <%- include("./partials/head.ejs") -%>
+
+    <body>
+        <%- include("nav") -%>
+        <div class="category-wrapper">
+            <h1 class="title"><%= title %></h1>
+            
+                    <div class="category">
+                        <h2 class="category-name"><%= category.name %></h2>
+                        <p class="category-description"><%= category.description %></p>
+                        <div class="category-link-wrapper">
+                            <a class="update-category" href="<%= category.url %>/update-category">Update Category</a>
+                            <a class="delete-category" href="<%= category.url %>/delete-category">Delete Category</a>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </body>
+</html>

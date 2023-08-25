@@ -14,7 +14,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.category {
+.item-category {
     text-transform: capitalize;
     border-radius: 100vh;
     padding: 0 8px;
@@ -33,7 +33,7 @@
 
 .item-card-name,
 .item-card-price,
-.category {
+.item-category {
     overflow: hidden;
     text-overflow: ellipsis;
 }
