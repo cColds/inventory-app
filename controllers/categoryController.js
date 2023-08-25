@@ -72,9 +72,23 @@ async function categoryGET(req, res) {
     res.render("category", { title: "Category", category });
 }
 
+async function updateCategoryGET(req, res) {
+    const category = await CategoryModel.findById(req.params.categoryId);
+    const { name, description } = category;
+
+    res.render("category-form", {
+        title: "Create Category",
+        name,
+        description,
+        nameError: "",
+        descriptionError: "",
+    });
+}
+
 module.exports = {
     createCategoryGET,
     createCategoryPOST,
     categoryListGET,
     categoryGET,
+    updateCategoryGET,
 };

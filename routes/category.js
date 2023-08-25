@@ -11,4 +11,9 @@ router.get("/categories", categoryController.categoryListGET);
 
 router.get("/categories/:categoryId", categoryController.categoryGET);
 
+router.get(
+    "/categories/:categoryId/update-category",
+    categoryController.updateCategoryGET
+);
+
 module.exports = router;
