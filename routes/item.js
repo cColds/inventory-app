@@ -9,4 +9,6 @@ router.post("/create-item", itemController.createItemPOST);
 
 router.get("/item/:itemId/update-item", itemController.updateItemGET);
 
+router.post("/item/:itemId/update-item", itemController.updateItemPOST);
+
 module.exports = router;
