@@ -26,4 +26,9 @@ router.get(
     categoryController.deleteCategoryGET
 );
 
+router.post(
+    "/categories/:categoryId/delete-category",
+    categoryController.deleteCategoryPOST
+);
+
 module.exports = router;

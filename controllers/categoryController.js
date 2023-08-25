@@ -87,6 +87,9 @@ const updateCategoryPOST = [
 ];
 
 async function deleteCategoryGET(req, res) {
+    // TODO: Update item schema to reference category doc,
+    // so item uses the category id instead of its name that can change
+
     const category = await CategoryModel.findById(req.params.categoryId);
     const itemsWithCategory = await ItemModel.find({ category: category.name });
 
@@ -97,6 +100,24 @@ async function deleteCategoryGET(req, res) {
     });
 }
 
+async function deleteCategoryPOST(req, res) {
+    const category = await CategoryModel.findById(req.params.categoryId);
+    const itemsWithCategory = await ItemModel.find({ category: category.name });
+
+    if (itemsWithCategory.length) {
+        res.render("delete-category", {
+            title: "Delete Category",
+            category,
+            itemsWithCategory,
+        });
+
+        return;
+    }
+
+    await CategoryModel.deleteOne({ _id: req.params.categoryId });
+    res.redirect("/categories");
+}
+
 module.exports = {
     createCategoryGET,
     createCategoryPOST,
@@ -105,4 +126,5 @@ module.exports = {
     updateCategoryGET,
     updateCategoryPOST,
     deleteCategoryGET,
+    deleteCategoryPOST,
 };
