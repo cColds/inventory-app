@@ -1,41 +1,13 @@
-const { body, validationResult } = require("express-validator");
 const CategoryModel = require("../models/category");
 const ItemModel = require("../models/item");
-const isNumeric = require("../utils/isNumeric");
-
-async function handleValidation(req, res, next) {
-    const result = validationResult(req);
-    if (!result.isEmpty()) {
-        const categories = await CategoryModel.find({}, "name");
-        const { errors } = result;
-        const nameError = errors.find((err) => err.path === "item-name");
-        const descriptionError = errors.find(
-            (err) => err.path === "item-description"
-        );
-        const priceError = errors.find((err) => err.path === "item-price");
-        const stockError = errors.find((err) => err.path === "item-stock");
-        const categoryError = errors.find(
-            (err) => err.path === "item-category"
-        );
-
-        res.render("item-form", {
-            title: "Create Item",
-            name: req.body["item-name"],
-            description: req.body["item-description"],
-            price: req.body["item-price"],
-            stock: req.body["item-stock"],
-            categories,
-            selected: req.body["item-category"],
-            nameError,
-            descriptionError,
-            priceError,
-            stockError,
-            categoryError,
-        });
-    }
-
-    next();
-}
+const handleItemValidation = require("../validation/handleItemValidation");
+const {
+    nameValidator,
+    descriptionValidator,
+    priceValidator,
+    stockValidator,
+    categoryValidator,
+} = require("../validation/itemValidator");
 
 async function createItemGET(req, res) {
     const categories = await CategoryModel.find({}, "name");
@@ -57,68 +29,13 @@ async function createItemGET(req, res) {
 }
 
 const createItemPOST = [
-    body("item-name")
-        .trim()
-        .notEmpty()
-        .withMessage("Name cannot be empty")
-        .isLength({ max: 150 })
-        .withMessage("Name must be 150 characters or less")
-        .escape(),
-
-    body("item-description")
-        .trim()
-        .isLength({ max: 350 })
-        .withMessage("Description must be 350 characters or less")
-        .escape(),
-
-    body("item-price")
-        .trim()
-        .notEmpty()
-        .withMessage("Price cannot be empty")
-        .custom((price) => {
-            if (isNumeric(price) || Number(price) === Infinity) {
-                throw new Error("Price is invalid");
-            }
-
-            if (Number(price) < 0.01) {
-                throw new Error("Price must be $0.01 or greater");
-            }
-
-            return true;
-        })
-        .escape(),
-
-    body("item-stock")
-        .trim()
-        .notEmpty()
-        .withMessage("Stock cannot be empty")
-        .isNumeric()
-        .withMessage("Stock must be an integer")
-        .isInt({ min: 1 })
-        .withMessage("Stock must be an integer of 1 or greater")
-        .isInt({ max: 1_000_000 })
-        .withMessage("Stock must be an integer of 1,000,000 or fewer")
-        .escape(),
-
-    body("item-category")
-        .custom(async (value) => {
-            const categories = await CategoryModel.find({}, "name");
-            if (!categories.length) {
-                throw new Error("No categories available");
-            }
-
-            const categoryExists = categories.some(
-                (category) => category.name === value
-            );
-
-            if (!categoryExists) throw new Error("Category doesn't exist");
-
-            return true;
-        })
-        .escape(),
-    handleValidation,
+    nameValidator,
+    descriptionValidator,
+    priceValidator,
+    stockValidator,
+    categoryValidator,
+    handleItemValidation,
     async (req, res) => {
-        console.log("Post sending");
         const {
             "item-name": name,
             "item-description": description,
@@ -161,66 +78,12 @@ async function updateItemGET(req, res) {
 }
 
 const updateItemPOST = [
-    body("item-name")
-        .trim()
-        .notEmpty()
-        .withMessage("Name cannot be empty")
-        .isLength({ max: 150 })
-        .withMessage("Name must be 150 characters or less")
-        .escape(),
-
-    body("item-description")
-        .trim()
-        .isLength({ max: 350 })
-        .withMessage("Description must be 350 characters or less")
-        .escape(),
-
-    body("item-price")
-        .trim()
-        .notEmpty()
-        .withMessage("Price cannot be empty")
-        .custom((price) => {
-            if (isNumeric(price) || Number(price) === Infinity) {
-                throw new Error("Price is invalid");
-            }
-
-            if (Number(price) < 0.01) {
-                throw new Error("Price must be $0.01 or greater");
-            }
-
-            return true;
-        })
-        .escape(),
-
-    body("item-stock")
-        .trim()
-        .notEmpty()
-        .withMessage("Stock cannot be empty")
-        .isNumeric()
-        .withMessage("Stock must be an integer")
-        .isInt({ min: 1 })
-        .withMessage("Stock must be an integer of 1 or greater")
-        .isInt({ max: 1_000_000 })
-        .withMessage("Stock must be an integer of 1,000,000 or fewer")
-        .escape(),
-
-    body("item-category")
-        .custom(async (value) => {
-            const categories = await CategoryModel.find({}, "name");
-            if (!categories.length) {
-                throw new Error("No categories available");
-            }
-
-            const categoryExists = categories.some(
-                (category) => category.name === value
-            );
-
-            if (!categoryExists) throw new Error("Category doesn't exist");
-
-            return true;
-        })
-        .escape(),
-    handleValidation,
+    nameValidator,
+    descriptionValidator,
+    priceValidator,
+    stockValidator,
+    categoryValidator,
+    handleItemValidation,
     async (req, res) => {
         const {
             "item-name": name,
