@@ -131,4 +131,24 @@ const createItemPOST = [
     },
 ];
 
-module.exports = { createItemGET, createItemPOST };
+async function updateItemGET(req, res) {
+    const item = await ItemModel.findById(req.params.itemId);
+    const categories = await CategoryModel.find();
+
+    res.render("item-form", {
+        title: "Update Item",
+        name: item.name,
+        description: item.description,
+        price: item.price,
+        stock: item.stock,
+        categories,
+        selected: item.category,
+        nameError: "",
+        descriptionError: "",
+        priceError: "",
+        stockError: "",
+        categoryError: "",
+    });
+}
+
+module.exports = { createItemGET, createItemPOST, updateItemGET };

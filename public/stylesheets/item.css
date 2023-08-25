@@ -12,3 +12,12 @@
 .item-description {
     color: #64748b;
 }
+
+.update-item-btn {
+    background-color: #b91c1c;
+    color: white;
+    border-radius: 5px;
+    padding: 6px 8px;
+    width: min-content;
+    white-space: nowrap;
+}
