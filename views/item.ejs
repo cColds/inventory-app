@@ -4,19 +4,22 @@
     <body>
         <%- include("nav"); -%>
 
-        <div class="item">
-            <h1><%= item.name %></h1>
-            <p><strong><%= item.priceFormatted %></strong></p>
-            <p class="item-description"><%= item.description %></p>
-            <p class="item-stock">In stock: <%= item.stock %></p>
-            <p class="item-category"><%= item.category %></p>
-            <div class="item-link-wrapper">
-                <a href="<%=item.url%>/update-item" class="update-item"
-                    >Update Item</a
-                >
-                <a href="<%=item.url%>/delete-item" class="delete-item"
-                    >Delete Item</a
-                >
+        <div class="item-wrapper">
+            <h1 class="title"><%= title %></h1>
+            <div class="item">
+                <h2><%= item.name %></h2>
+                <p><strong><%= item.priceFormatted %></strong></p>
+                <p class="item-description"><%= item.description %></p>
+                <p class="item-stock">In stock: <%= item.stock %></p>
+                <p class="item-category"><%= item.category %></p>
+                <div class="item-link-wrapper">
+                    <a href="<%=item.url%>/update-item" class="update-item"
+                        >Update Item</a
+                    >
+                    <a href="<%=item.url%>/delete-item" class="delete-item"
+                        >Delete Item</a
+                    >
+                </div>
             </div>
         </div>
     </body>
