@@ -5,7 +5,12 @@
         <%- include("nav"); -%>
         <div class="form-wrapper">
             <h1 class="title"><%=title%></h1>
-            <form action="" method="post" class="item-form">
+            <form
+                action=""
+                method="post"
+                class="item-form"
+                enctype="multipart/form-data"
+            >
                 <label for="item-field-name">Name</label>
                 <input
                     type="text"
@@ -70,8 +75,8 @@
                 <label for="item-field-category">Category</label>
 
                 <select name="item-category" id="item-field-category">
-                    <% categories.forEach((category) => { %> <% if (selected &&
-                    category._id.toString() === selected) { %>
+                    <% categories.forEach((category) => { %> 
+                    <% if (selected && category._id.toString() === selected) { %>
                     <option value="<%= category._id %>" selected>
                         <%= category.name %>
                     </option>
@@ -81,6 +86,14 @@
                     </option>
                     <% } }); %>
                 </select>
+
+                <label for="item-field-file"
+                    >Image <span class="optional-text">(optional)</span></label
+                >
+                <input type="file" name="item-image" accept="image/avif, image/jpeg, image/png, image/webp"/>
+                <% if (fileValidationError) { %>
+                    <p class="error-text"><%= fileValidationError %></p>
+                <% } %>
 
                 <button type="submit" class="submit-btn">Submit</button>
             </form>

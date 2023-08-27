@@ -8,6 +8,10 @@ const itemSchema = new Schema({
     category: { type: Schema.Types.ObjectId, ref: "category", required: true },
     price: { type: Number, required: true },
     stock: { type: Number, required: true },
+    file: {
+        data: Buffer,
+        contentType: String,
+    },
 });
 
 itemSchema.virtual("url").get(function () {

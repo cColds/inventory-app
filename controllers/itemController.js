@@ -1,3 +1,4 @@
+const multer = require("multer");
 const CategoryModel = require("../models/category");
 const ItemModel = require("../models/item");
 const handleItemValidation = require("../validation/handleItemValidation");
@@ -8,6 +9,25 @@ const {
     stockValidator,
     categoryValidator,
 } = require("../validation/itemValidator");
+
+const storage = multer.memoryStorage();
+const upload = multer({
+    storage,
+    fileFilter: (req, file, cb) => {
+        const validImageExts = [
+            "image/webp",
+            "image/png",
+            "image/jpeg",
+            "image/avif",
+        ];
+        if (validImageExts.includes(file.mimetype)) cb(null, true);
+        else {
+            req.fileValidationError = "Invalid path";
+
+            cb(null, false);
+        }
+    },
+});
 
 async function createItemGET(req, res) {
     const categories = await CategoryModel.find({}, "name");
@@ -25,10 +45,12 @@ async function createItemGET(req, res) {
         priceError: "",
         stockError: "",
         categoryError: "",
+        fileValidationError: undefined,
     });
 }
 
 const createItemPOST = [
+    upload.single("item-image"),
     nameValidator,
     descriptionValidator,
     priceValidator,
@@ -43,6 +65,12 @@ const createItemPOST = [
         } = req.body;
         const price = Number(req.body["item-price"]);
         const stock = parseInt(req.body["item-stock"], 10);
+        const file = req.file
+            ? {
+                  data: Buffer.from(req.file.buffer).toString("base64"),
+                  contentType: req.file.mimetype,
+              }
+            : undefined;
 
         const item = new ItemModel({
             name,
@@ -50,6 +78,7 @@ const createItemPOST = [
             category,
             price,
             stock,
+            file,
         });
 
         await item.save();
@@ -76,6 +105,7 @@ async function updateItemGET(req, res) {
         priceError: "",
         stockError: "",
         categoryError: "",
+        fileValidationError: undefined,
     });
 }
 

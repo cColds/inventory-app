@@ -3,7 +3,9 @@ const CategoryModel = require("../models/category");
 
 async function handleItemValidation(req, res, next) {
     const result = validationResult(req);
-    if (!result.isEmpty()) {
+    const { fileValidationError } = req;
+
+    if (!result.isEmpty() || fileValidationError) {
         const categories = await CategoryModel.find({}, "name");
         const { errors } = result;
         const nameError = errors.find((err) => err.path === "item-name");
@@ -29,6 +31,7 @@ async function handleItemValidation(req, res, next) {
             priceError,
             stockError,
             categoryError,
+            fileValidationError,
         });
         return;
     }
