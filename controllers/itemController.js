@@ -58,7 +58,9 @@ const createItemPOST = [
 ];
 
 async function updateItemGET(req, res) {
-    const item = await ItemModel.findById(req.params.itemId);
+    const item = await ItemModel.findById(req.params.itemId).populate({
+        path: "category",
+    });
     const categories = await CategoryModel.find();
 
     res.render("item-form", {
@@ -68,7 +70,7 @@ async function updateItemGET(req, res) {
         price: item.price,
         stock: item.stock,
         categories,
-        selected: item.category,
+        selected: item.category._id.toString(),
         nameError: "",
         descriptionError: "",
         priceError: "",
