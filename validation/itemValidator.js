@@ -47,18 +47,23 @@ const stockValidator = body("item-stock")
 
 const categoryValidator = body("item-category")
     .custom(async (value) => {
-        const categories = await CategoryModel.find({}, "name");
-        if (!categories.length) {
-            throw new Error("No categories available");
+        try {
+            const categories = await CategoryModel.find({}, "name");
+            if (!categories.length) {
+                throw new Error("No categories available");
+            }
+
+            const categoryExists = categories.some(
+                (category) => category._id.toString() === value
+            );
+
+            if (!categoryExists) throw new Error("Category doesn't exist");
+
+            return true;
+        } catch (e) {
+            console.error("something went wrong:", e);
+            return false;
         }
-
-        const categoryExists = categories.some(
-            (category) => category.name === value
-        );
-
-        if (!categoryExists) throw new Error("Category doesn't exist");
-
-        return true;
     })
     .escape();
 

@@ -89,33 +89,48 @@ const updateCategoryPOST = [
 async function deleteCategoryGET(req, res) {
     // TODO: Update item schema to reference category doc,
     // so item uses the category id instead of its name that can change
+    try {
+        const category = await CategoryModel.findById(req.params.categoryId);
 
-    const category = await CategoryModel.findById(req.params.categoryId);
-    const itemsWithCategory = await ItemModel.find({ category: category.name });
+        const itemsWithCategory = await ItemModel.find({
+            category: { _id: req.params.categoryId },
+        }).populate("category");
 
-    res.render("delete-category", {
-        title: "Delete Category",
-        category,
-        itemsWithCategory,
-    });
-}
-
-async function deleteCategoryPOST(req, res) {
-    const category = await CategoryModel.findById(req.params.categoryId);
-    const itemsWithCategory = await ItemModel.find({ category: category.name });
-
-    if (itemsWithCategory.length) {
         res.render("delete-category", {
             title: "Delete Category",
             category,
             itemsWithCategory,
         });
+    } catch (e) {
+        console.error("Something went wrong: ", e);
 
-        return;
+        res.send(`${e}`);
     }
+}
 
-    await CategoryModel.deleteOne({ _id: req.params.categoryId });
-    res.redirect("/categories");
+async function deleteCategoryPOST(req, res) {
+    try {
+        const category = await CategoryModel.findById(req.params.categoryId);
+        const itemsWithCategory = await ItemModel.find({
+            category: { _id: req.params.categoryId },
+        }).populate("category");
+
+        if (itemsWithCategory.length) {
+            res.render("delete-category", {
+                title: "Delete Category",
+                category,
+                itemsWithCategory,
+            });
+
+            return;
+        }
+
+        await CategoryModel.deleteOne({ _id: req.params.categoryId });
+        res.redirect("/categories");
+    } catch (error) {
+        console.error("Something went wrong: ", error);
+        res.send(`${error}`);
+    }
 }
 
 module.exports = {
