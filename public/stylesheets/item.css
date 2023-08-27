@@ -13,6 +13,16 @@
     width: clamp(250px, 100%, 500px);
     margin: 0 auto;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    overflow: hidden;
+}
+
+.item-name {
+    overflow-wrap: anywhere;
+}
+
+.item-price {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-description {

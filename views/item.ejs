@@ -7,8 +7,10 @@
         <div class="item-wrapper">
             <h1 class="title"><%= title %></h1>
             <div class="item">
-                <h2><%= item.name %></h2>
-                <p><strong><%= item.priceFormatted %></strong></p>
+                <h2 class="item-name"><%= item.name %></h2>
+                <p class="item-price">
+                    <strong><%= item.priceFormatted %></strong>
+                </p>
                 <p class="item-description"><%= item.description %></p>
                 <p class="item-stock">In stock: <%= item.stock %></p>
                 <p class="item-category"><%= item.category.name %></p>

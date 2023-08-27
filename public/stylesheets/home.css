@@ -33,7 +33,9 @@
 
 .item-card-name,
 .item-card-price,
-.item-category {
+.item-category,
+.stats,
+.inventory-value {
     overflow: hidden;
     text-overflow: ellipsis;
 }
