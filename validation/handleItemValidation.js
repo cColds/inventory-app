@@ -6,8 +6,10 @@ async function handleItemValidation(req, res, next) {
     const { fileValidationError } = req;
 
     if (!result.isEmpty() || fileValidationError) {
+        // TODO: fix title should be update item if get error
         const categories = await CategoryModel.find({}, "name");
         const { errors } = result;
+
         const nameError = errors.find((err) => err.path === "item-name");
         const descriptionError = errors.find(
             (err) => err.path === "item-description"

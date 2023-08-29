@@ -23,7 +23,6 @@ const upload = multer({
         if (validImageExts.includes(file.mimetype)) cb(null, true);
         else {
             req.fileValidationError = "Invalid path";
-
             cb(null, false);
         }
     },
@@ -91,7 +90,6 @@ async function updateItemGET(req, res) {
         path: "category",
     });
     const categories = await CategoryModel.find();
-
     res.render("item-form", {
         title: "Update Item",
         name: item.name,
@@ -110,6 +108,7 @@ async function updateItemGET(req, res) {
 }
 
 const updateItemPOST = [
+    upload.single("item-image"),
     nameValidator,
     descriptionValidator,
     priceValidator,
@@ -124,15 +123,27 @@ const updateItemPOST = [
         } = req.body;
         const price = Number(req.body["item-price"]);
         const stock = parseInt(req.body["item-stock"], 10);
+        const file = req.file
+            ? {
+                  data: Buffer.from(req.file.buffer).toString("base64"),
+                  contentType: req.file.mimetype,
+              }
+            : undefined;
 
-        const item = new ItemModel({
+        const item = {
             _id: req.params.itemId,
             name,
             description,
             category,
             price,
             stock,
-        });
+        };
+
+        if (req.file) {
+            item.file = file;
+        } else if (!req.file) {
+            item.$unset = { file: 1 }; // This will remove the 'file' field from the document
+        }
 
         const updatedItem = await ItemModel.findByIdAndUpdate(
             req.params.itemId,
@@ -145,7 +156,6 @@ const updateItemPOST = [
 
 async function deleteItemGET(req, res) {
     const item = await ItemModel.findById(req.params.itemId);
-
     res.render("delete-item", { title: "Delete Item", item });
 }
 

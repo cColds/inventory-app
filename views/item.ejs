@@ -21,6 +21,9 @@
                     <a href="<%=item.url%>/delete-item" class="delete-item"
                         >Delete Item</a
                     >
+                    <% if (item.file.data) { %>
+                        <img src="data:<%= item.file.contentType %>;base64,<%= item.file.data %>" alt="item">
+                    <% } %>
                 </div>
             </div>
         </div>

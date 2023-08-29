@@ -28,7 +28,6 @@ async function itemPage(req, res, next) {
     const item = await ItemModel.findById(req.params.itemId).populate([
         { path: "category", strictPopulate: false },
     ]);
-
     res.render("item", { title: "Item", item });
 }
 

@@ -87,16 +87,34 @@
                     <% } }); %>
                 </select>
 
-                <label for="item-field-file"
+                <label for="item-field-image"
                     >Image <span class="optional-text">(optional)</span></label
                 >
-                <input type="file" name="item-image" accept="image/avif, image/jpeg, image/png, image/webp"/>
+                <input id="item-field-image" type="file" name="item-image" accept="image/avif, image/jpeg, image/png, image/webp"/>
+                
                 <% if (fileValidationError) { %>
                     <p class="error-text"><%= fileValidationError %></p>
                 <% } %>
+                
+                <button type="button" class="remove-image">Remove Image</button>
+
 
                 <button type="submit" class="submit-btn">Submit</button>
             </form>
         </div>
     </body>
 </html>
+
+<script>
+
+const imageField = document.querySelector("#item-field-image")    
+const removeImage = document.querySelector(".remove-image")
+
+function handleRemoveImage() {
+    imageField.value = "";
+}
+
+removeImage.addEventListener('click', handleRemoveImage)
+
+
+</script>

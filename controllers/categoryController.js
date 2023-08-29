@@ -87,8 +87,6 @@ const updateCategoryPOST = [
 ];
 
 async function deleteCategoryGET(req, res) {
-    // TODO: Update item schema to reference category doc,
-    // so item uses the category id instead of its name that can change
     try {
         const category = await CategoryModel.findById(req.params.categoryId);
 
