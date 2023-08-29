@@ -55,7 +55,7 @@ const createItemPOST = [
     priceValidator,
     stockValidator,
     categoryValidator,
-    handleItemValidation,
+    handleItemValidation("Create Item"),
     async (req, res) => {
         const {
             "item-name": name,
@@ -114,7 +114,7 @@ const updateItemPOST = [
     priceValidator,
     stockValidator,
     categoryValidator,
-    handleItemValidation,
+    handleItemValidation("Update Item"),
     async (req, res) => {
         const {
             "item-name": name,
