@@ -6,22 +6,34 @@
 
         <div class="delete-category-wrapper">
             <h1 class="title"><%= title %></h1>
-            <% if (itemsWithCategory.length) { %>
-            <p class="delete-category-warning">Delete the following items</p>
-            <% itemsWithCategory.forEach(item => { %>
-            <a class="item-name" href="<%= item.url %>"><%= item.name %></a>
+            
+            
+            
+            <form class="delete-category-form" action="" method="post">
+                <% if (itemsWithCategory.length) { %>
+                <p class="delete-category-warning">Delete the following items</p>
+                <% itemsWithCategory.forEach(item => { %>
+                <a class="item-name" href="<%= item.url %>"><%= item.name %></a>
+    
+                <% }) %> <% } else { %>
+                <p class="delete-category-warning">
+                    Are you sure you want to delete
+                    <strong><%= category.name %></strong>?
+                </p>
+                <label class="admin-password-wrapper">
+                    Admin Password
+                    <input type="text" placeholder="Password" name="password" required>
+                </label>
+                <% if (passwordError) { %>
+                    <p class="error-text"><%= passwordError %></p>
+                <% } %>
 
-            <% }) %> <% } else { %>
-            <p class="delete-category-warning">
-                Are you sure you want to delete
-                <strong><%= category.name %></strong>?
-            </p>
-
-            <form class="delete-category-btn-wrapper" action="" method="post">
-                <a href="<%= category.url %>" class="delete-category-cancel"
-                    >Cancel</a
-                >
-                <button class="delete-category-confirm">Confirm</button>
+                <div class="btn-wrapper">
+                    <a href="<%= category.url %>" class="delete-category-cancel"
+                        >Cancel</a
+                    >
+                    <button class="delete-category-confirm">Confirm</button>
+                </div>
             </form>
             <% } %>
         </div>

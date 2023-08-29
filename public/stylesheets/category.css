@@ -69,9 +69,10 @@
     margin-bottom: 15px;
 }
 
-.delete-category-btn-wrapper {
+.delete-category-form {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .delete-category-cancel {

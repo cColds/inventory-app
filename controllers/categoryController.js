@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const CategoryModel = require("../models/category");
 const ItemModel = require("../models/item");
 const handleCategoryValidation = require("../validation/handleCategoryValidation");
@@ -98,6 +98,7 @@ async function deleteCategoryGET(req, res) {
             title: "Delete Category",
             category,
             itemsWithCategory,
+            passwordError: false,
         });
     } catch (e) {
         console.error("Something went wrong: ", e);
@@ -106,30 +107,47 @@ async function deleteCategoryGET(req, res) {
     }
 }
 
-async function deleteCategoryPOST(req, res) {
-    try {
-        const category = await CategoryModel.findById(req.params.categoryId);
-        const itemsWithCategory = await ItemModel.find({
-            category: { _id: req.params.categoryId },
-        }).populate("category");
+const deleteCategoryPOST = [
+    body("password")
+        .notEmpty()
+        .withMessage("Password cannot be empty")
+        .custom((password) => {
+            if (password !== process.env.ADMIN_PASS) {
+                throw new Error("Password is incorrect");
+            }
+            return true;
+        })
+        .escape(),
 
-        if (itemsWithCategory.length) {
-            res.render("delete-category", {
-                title: "Delete Category",
-                category,
-                itemsWithCategory,
-            });
+    async (req, res) => {
+        try {
+            const category = await CategoryModel.findById(
+                req.params.categoryId
+            );
+            const itemsWithCategory = await ItemModel.find({
+                category: { _id: req.params.categoryId },
+            }).populate("category");
+            const result = validationResult(req);
 
-            return;
+            if (itemsWithCategory.length || !result.isEmpty()) {
+                res.render("delete-category", {
+                    title: "Delete Category",
+                    category,
+                    itemsWithCategory,
+                    passwordError: result.errors[0].msg,
+                });
+
+                return;
+            }
+
+            await CategoryModel.deleteOne({ _id: req.params.categoryId });
+            res.redirect("/categories");
+        } catch (error) {
+            console.error("Something went wrong: ", error);
+            res.send(`${error}`);
         }
-
-        await CategoryModel.deleteOne({ _id: req.params.categoryId });
-        res.redirect("/categories");
-    } catch (error) {
-        console.error("Something went wrong: ", error);
-        res.send(`${error}`);
-    }
-}
+    },
+];
 
 module.exports = {
     createCategoryGET,
