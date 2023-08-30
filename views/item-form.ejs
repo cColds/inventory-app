@@ -27,7 +27,7 @@
                     id="item-field-name"
                     name="item-name"
                     placeholder="Name"
-                    value="<%=name ? name : ''%>"
+                    value="<%=name || ''%>"
                     maxlength="150"
                     required
                 />
@@ -58,7 +58,7 @@
                     id="item-field-price"
                     name="item-price"
                     step="0.01"
-                    value="<%=price ? price : ''%>"
+                    value="<%=price || ''%>"
                     placeholder="Price in USD"
                     min="0.01"
                     required
@@ -72,7 +72,7 @@
                     type="number"
                     id="item-field-stock"
                     name="item-stock"
-                    value="<%=stock ? stock : ''%>"
+                    value="<%=stock || ''%>"
                     placeholder="Amount"
                     min="1"
                     max="1000000"
