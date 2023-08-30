@@ -87,7 +87,8 @@
 .delete-item,
 .delete-item-confirm,
 .delete-category,
-.delete-category-confirm {
+.delete-category-confirm,
+.remove-image {
     color: white;
     background-color: #b91c1c;
 }
