@@ -6,7 +6,13 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
+const RateLimit = require("express-rate-limit");
 const mongoose = require("mongoose");
+
+const limiter = RateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 20,
+});
 
 const mongoDB = process.env.MONGODB_URI;
 
@@ -39,6 +45,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(compression());
 app.use(helmet());
+app.use(limiter);
 
 // routes
 app.use("/", indexRouter);
