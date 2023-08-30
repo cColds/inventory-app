@@ -6,6 +6,7 @@ const {
     nameValidator,
     descriptionValidator,
 } = require("../validation/categoryValidator");
+const passwordValidator = require("../validation/passwordValidator");
 
 async function createCategoryGET(req, res) {
     res.render("category-form", {
@@ -108,16 +109,7 @@ async function deleteCategoryGET(req, res) {
 }
 
 const deleteCategoryPOST = [
-    body("password")
-        .notEmpty()
-        .withMessage("Password cannot be empty")
-        .custom((password) => {
-            if (password !== process.env.ADMIN_PASS) {
-                throw new Error("Password is incorrect");
-            }
-            return true;
-        })
-        .escape(),
+    passwordValidator,
 
     async (req, res) => {
         try {
