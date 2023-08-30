@@ -10,83 +10,10 @@
     text-align: center;
 }
 
-.item {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    border-radius: 5px;
-    gap: 12px;
-    width: clamp(250px, 100%, 500px);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    overflow: hidden;
-}
-
 .item-image {
     max-width: 500px;
 }
 
 .item-name {
     overflow-wrap: anywhere;
-}
-
-.item-price {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.item-description {
-    color: #64748b;
-}
-
-.item-link-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.update-item {
-    color: white;
-    background-color: #15803d;
-}
-
-.delete-item,
-.delete-item-confirm {
-    color: white;
-    background-color: #b91c1c;
-}
-
-.update-item,
-.delete-item,
-.delete-item-cancel,
-.delete-item-confirm {
-    border-radius: 5px;
-    padding: 6px 12px;
-    width: min-content;
-    white-space: nowrap;
-}
-
-.delete-item-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.delete-item-warning {
-    margin-bottom: 15px;
-}
-
-.delete-item-cancel {
-    background-color: #e2e8f0;
-    color: black;
-}
-
-.delete-item-confirm {
-    font-size: 16px;
-}
-
-.delete-item-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }

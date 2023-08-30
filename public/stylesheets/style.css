@@ -70,3 +70,20 @@ img {
     flex-direction: column;
     gap: 5px;
 }
+
+.error-text {
+    color: #b91c1c;
+}
+
+.item-description,
+.category-description,
+.optional-text {
+    color: #64748b;
+}
+
+.item-price,
+.category-name,
+.category-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
