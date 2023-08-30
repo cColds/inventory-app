@@ -23,7 +23,7 @@ async function createCategoryGET(req, res) {
 const createCategoryPOST = [
     nameValidator,
     descriptionValidator,
-    handleCategoryValidation,
+    handleCategoryValidation("Create Category"),
     async (req, res) => {
         const category = new CategoryModel({
             name: req.body["category-name"],
@@ -53,7 +53,7 @@ async function updateCategoryGET(req, res) {
     const { name, description } = category;
 
     res.render("category-form", {
-        title: "Create Category",
+        title: "Update Category",
         name,
         description,
         nameError: "",
@@ -67,7 +67,7 @@ const updateCategoryPOST = [
     passwordValidator,
     nameValidator,
     descriptionValidator,
-    handleCategoryValidation,
+    handleCategoryValidation("Update Category"),
 
     async (req, res) => {
         const category = new CategoryModel({
