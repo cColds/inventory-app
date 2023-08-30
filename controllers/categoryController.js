@@ -29,7 +29,7 @@ const createCategoryPOST = [
 
         await category.save();
 
-        res.redirect("/");
+        res.redirect(category.url);
     },
 ];
 
