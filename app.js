@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const compression = require("compression");
 const mongoose = require("mongoose");
 
 const mongoDB = process.env.MONGODB_URI;
@@ -29,12 +30,15 @@ main();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// middleware helpers
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(compression());
 
+// routes
 app.use("/", indexRouter);
 app.use(itemRouter);
 app.use(categoryRouter);
