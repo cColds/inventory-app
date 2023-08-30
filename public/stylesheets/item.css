@@ -76,11 +76,6 @@
     margin-bottom: 15px;
 }
 
-.delete-item-btn-wrapper {
-    display: flex;
-    gap: 8px;
-}
-
 .delete-item-cancel {
     background-color: #e2e8f0;
     color: black;
