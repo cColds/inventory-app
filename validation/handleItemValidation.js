@@ -10,6 +10,9 @@ function handleItemValidation(title) {
             const categories = await CategoryModel.find({}, "name");
             const { errors } = result;
 
+            const passwordError = result.errors.find(
+                (err) => err.path === "password"
+            );
             const nameError = errors.find((err) => err.path === "item-name");
             const descriptionError = errors.find(
                 (err) => err.path === "item-description"
@@ -19,6 +22,13 @@ function handleItemValidation(title) {
             const categoryError = errors.find(
                 (err) => err.path === "item-category"
             );
+
+            const hasAdminPassword = req.body.password !== undefined;
+
+            const isInvalidAdminPassword =
+                hasAdminPassword &&
+                req.body.password !== undefined &&
+                passwordError?.msg !== undefined;
 
             res.render("item-form", {
                 title,
@@ -34,6 +44,10 @@ function handleItemValidation(title) {
                 stockError,
                 categoryError,
                 fileValidationError,
+                passwordError: isInvalidAdminPassword
+                    ? passwordError.msg
+                    : false,
+                hasAdminPassword,
             });
             return;
         }

@@ -47,6 +47,8 @@ async function createItemGET(req, res) {
         stockError: "",
         categoryError: "",
         fileValidationError: undefined,
+        passwordError: false,
+        hasAdminPassword: false,
     });
 }
 
@@ -106,11 +108,14 @@ async function updateItemGET(req, res) {
         stockError: "",
         categoryError: "",
         fileValidationError: undefined,
+        passwordError: false,
+        hasAdminPassword: true,
     });
 }
 
 const updateItemPOST = [
     upload.single("item-image"),
+    passwordValidator,
     nameValidator,
     descriptionValidator,
     priceValidator,
