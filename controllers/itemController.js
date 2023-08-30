@@ -1,4 +1,5 @@
 const multer = require("multer");
+const { validationResult } = require("express-validator");
 const CategoryModel = require("../models/category");
 const ItemModel = require("../models/item");
 const handleItemValidation = require("../validation/handleItemValidation");
@@ -9,6 +10,7 @@ const {
     stockValidator,
     categoryValidator,
 } = require("../validation/itemValidator");
+const passwordValidator = require("../validation/passwordValidator");
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -156,16 +158,34 @@ const updateItemPOST = [
 
 async function deleteItemGET(req, res) {
     const item = await ItemModel.findById(req.params.itemId);
-    res.render("delete-item", { title: "Delete Item", item });
+    res.render("delete-item", {
+        title: "Delete Item",
+        item,
+        passwordError: false,
+    });
 }
 
-async function deleteItemPOST(req, res) {
-    const item = await ItemModel.findById(req.params.itemId);
+const deleteItemPOST = [
+    passwordValidator,
+    async (req, res) => {
+        const item = await ItemModel.findById(req.params.itemId);
+        const result = validationResult(req);
 
-    await item.deleteOne({ _id: req.params.itemId });
+        if (!result.isEmpty()) {
+            res.render("delete-item", {
+                title: "Delete Item",
+                item,
+                passwordError: result.errors[0].msg,
+            });
 
-    res.redirect("/");
-}
+            return;
+        }
+
+        await item.deleteOne({ _id: req.params.itemId });
+
+        res.redirect("/");
+    },
+];
 
 module.exports = {
     createItemGET,

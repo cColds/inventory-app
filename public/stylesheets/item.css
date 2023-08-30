@@ -84,3 +84,9 @@
 .delete-item-confirm {
     font-size: 16px;
 }
+
+.delete-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -6,14 +6,24 @@
 
         <div class="delete-item-wrapper">
             <h1 class="title"><%= title %></h1>
-            <p class="delete-item-warning">
-                Are you sure you want to delete
-                <strong><%= item.name %></strong>?
-            </p>
+            
+            <form class="delete-item-form" action="" method="post">
+                <p class="delete-item-warning">
+                    Are you sure you want to delete
+                    <strong><%= item.name %></strong>?
+                </p>
+                <label class="admin-password-wrapper">
+                    Admin Password
+                    <input type="password" placeholder="Password" name="password" required>
+                </label>
+                <% if (passwordError) { %>
+                    <p class="error-text"><%= passwordError %></p>
+                <% } %>
 
-            <form class="delete-item-btn-wrapper" action="" method="post">
-                <a href="<%= item.url %>" class="delete-item-cancel">Cancel</a>
-                <button class="delete-item-confirm">Confirm</button>
+                <div class="btn-wrapper">
+                    <a href="<%= item.url %>" class="delete-item-cancel">Cancel</a>
+                    <button class="delete-item-confirm">Confirm</button>
+                </div>
             </form>
         </div>
     </body>
