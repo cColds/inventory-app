@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
-    <%- include("./partials/head.ejs") -%>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/form.css" />
+        <link rel="stylesheet" href="/stylesheets/home.css" />
+        <link rel="stylesheet" href="/stylesheets/nav.css" />
+        <link rel="stylesheet" href="/stylesheets/item.css" />
+        <link rel="stylesheet" href="/stylesheets/category.css" />
+        <script src="/javascripts/handleRemoveImage.js" defer></script>
+    </head>
+    
     <body>
         <%- include("nav"); -%>
         <div class="form-wrapper">
@@ -114,17 +124,3 @@
         </div>
     </body>
 </html>
-
-<script>
-
-const imageField = document.querySelector("#item-field-image")    
-const removeImage = document.querySelector(".remove-image")
-
-function handleRemoveImage() {
-    imageField.value = "";
-}
-
-removeImage.addEventListener('click', handleRemoveImage)
-
-
-</script>
