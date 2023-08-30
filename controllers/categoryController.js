@@ -1,4 +1,4 @@
-const { body, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const CategoryModel = require("../models/category");
 const ItemModel = require("../models/item");
 const handleCategoryValidation = require("../validation/handleCategoryValidation");
@@ -65,18 +65,8 @@ async function updateCategoryGET(req, res) {
 
 const updateCategoryPOST = [
     passwordValidator,
-    body("category-name")
-        .trim()
-        .notEmpty()
-        .withMessage("Name cannot be empty")
-        .isLength({ max: 50 })
-        .withMessage("Name must be 50 characters or less")
-        .escape(),
-    body("category-description")
-        .trim()
-        .isLength({ max: 350 })
-        .withMessage("Description must be 350 characters or less")
-        .escape(),
+    nameValidator,
+    descriptionValidator,
     handleCategoryValidation,
 
     async (req, res) => {
