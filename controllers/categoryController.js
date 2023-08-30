@@ -15,6 +15,8 @@ async function createCategoryGET(req, res) {
         description: "",
         nameError: "",
         descriptionError: "",
+        passwordError: false,
+        hasAdminPassword: false,
     });
 }
 
@@ -56,10 +58,13 @@ async function updateCategoryGET(req, res) {
         description,
         nameError: "",
         descriptionError: "",
+        passwordError: false,
+        hasAdminPassword: true,
     });
 }
 
 const updateCategoryPOST = [
+    passwordValidator,
     body("category-name")
         .trim()
         .notEmpty()
@@ -100,6 +105,7 @@ async function deleteCategoryGET(req, res) {
             category,
             itemsWithCategory,
             passwordError: false,
+            hasAdminPassword: true,
         });
     } catch (e) {
         console.error("Something went wrong: ", e);
@@ -110,7 +116,6 @@ async function deleteCategoryGET(req, res) {
 
 const deleteCategoryPOST = [
     passwordValidator,
-
     async (req, res) => {
         try {
             const category = await CategoryModel.findById(

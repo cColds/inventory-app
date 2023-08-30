@@ -8,6 +8,16 @@
         <div class="form-wrapper">
             <h1 class="title"><%= title %></h1>
             <form action="" method="post" class="category-form">
+                <% if (hasAdminPassword) { %>
+                    <label class="admin-password-wrapper">
+                        Admin Password
+                        <input type="password" placeholder="Password" name="password" required>
+                    </label>
+                    <% if (passwordError) { %>
+                        <p class="error-text"><%= passwordError %></p>
+                    <% } %>
+                    <% } %>
+
                 <label for="category-field-name">Name</label>
                 <input
                     type="text"
