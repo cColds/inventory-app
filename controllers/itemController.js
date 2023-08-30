@@ -24,7 +24,8 @@ const upload = multer({
         ];
         if (validImageExts.includes(file.mimetype)) cb(null, true);
         else {
-            req.fileValidationError = "Invalid path";
+            req.fileValidationError =
+                "File extension must be .webp, .png, .jpg/jpeg, or .avif";
             cb(null, false);
         }
     },
